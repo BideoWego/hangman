@@ -1,0 +1,48 @@
+<a href="/" class="btn btn-primary">New Game</a>
+
+<h3>Lives: <%= Game.lives %></h3>
+
+<pre id="art" style="background: #222; color: #<%= ['c00', 'f30', 'f90', 'fc0', 'cf3', '6f6'][Game.lives] %>;"><%= $art[Game.lives] %></pre>
+
+<% if Game.state[:cheat] %>
+	<h3>The word is <code><%= Game.word %></code></h3>
+<% end %>
+
+<h2 id="progress">
+	<%= Game.progress %>
+</h2>
+
+<% if Game.lives > 0 %>
+
+	<% if Game.win %>
+		<div class="alert alert-success">
+			You win! Hip hip hurray! <a href="/">Play again?</a>
+		</div>
+
+	<% else %>
+
+		<form>
+			<div class="form-group">
+				<input type="hidden" value="<%= Game.difficulty %>" name="difficulty"/>
+				<% if not Game.guesses.empty? %>
+					<input type="hidden" value="<%= Game.guesses(true) %>" name="guesses"/>
+				<% end %>
+				<label for="guess">Letters</label>
+				<select id="guess" name="guess" class="form-control">
+					<% Game.options.each do |letter| %>
+						<option value="<%= letter %>"><%= letter %></option>
+					<% end %>
+				</select>
+			</div>
+			<input type="submit" value="Make a guess!" class="btn btn-primary"/>
+		</form>
+
+	<% end %>
+
+<% else %>
+
+	<div class="alert alert-danger">
+		You lose! The word was: <%= Game.word %>
+	</div>
+
+<% end %>

@@ -1,0 +1,15 @@
+<h4>Select a difficulty level</h4>
+<div class="alert alert-info">
+	The difficulty level is the number of letters in the word
+</div>
+<form>
+	<div class="form-group">
+		<label for="difficulty">Difficulty</label>
+		<select id="difficulty" name="difficulty" class="form-control">
+			<% Game.difficulties.each do |d| %>
+				<option value="<%= d %>"><%= (d.to_i + 1).to_s %></option>
+			<% end %>
+		</select>
+	</div>
+	<input type="submit" value="Start Game" class="btn btn-primary"/>
+</form>

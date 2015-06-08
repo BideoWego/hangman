@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<title>Hangman</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+		<style type="text/css">
+			h1,h2,h3,h4,h5,h6{
+				text-align: center;
+			}
+			#progress{
+				letter-spacing: 4px;
+			}
+			#game{
+				max-width: 480px;
+				margin: 16px auto;
+			}
+			#art{
+				max-width: 128px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="container">
+
+			<div id="game">
+
+				<h1>Hangman</h1>
+
+				<hr/>
+
+				<%= yield %>
+
+			</div>
+
+		</div>
+	</body>
+</html>
