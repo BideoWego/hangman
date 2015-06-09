@@ -2,14 +2,17 @@
 <html>
 	<head>
 		
-		<title>Hangman</title>
+		<title>Bideo Wego | Hangman</title>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 		<style type="text/css">
-			h1,h2,h3,h4,h5,h6{
+			body{
+				background: #111;
+			}
+			h1,h2,h3,h4,h5,h6,p{
 				text-align: center;
 			}
 			#progress{
@@ -17,12 +20,28 @@
 			}
 			#game{
 				max-width: 480px;
-				margin: 16px auto;
+				margin: 8px auto;
+				border-radius: 1em;
+				background: #fff;
+				padding: 2em;
 			}
 			#art{
 				max-width: 128px;
 				margin-right: auto;
 				margin-left: auto;
+			}
+			.health{
+				color: #<%= ( ! Game.playing) ? '337ab7' : ['c00', 'f30', 'f90', 'fc0', 'cf3', '6f6'][Game.lives] %>;
+			}
+			.scoring{
+				margin-top: 1em;
+				margin-bottom: 1em;
+			}
+			.big{
+				font-size: 4em;
+			}
+			button.center-block{
+				width: 100%;
 			}
 		</style>
 
@@ -31,8 +50,8 @@
 		<div class="container">
 
 			<div id="game">
-
-				<h1>Hangman</h1>
+				<p><a href="http://bideowego.com/games" title="More games by Bideo Wego" target="_blank">Bideo Wego</a> presents</p>
+				<h1><span class="health"><%= Game.icon('user') %></span> Hangman</h1>
 
 				<hr/>
 

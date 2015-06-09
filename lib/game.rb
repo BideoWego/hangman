@@ -1,10 +1,16 @@
 class Game
+	@@lives = 5
+
 	class << self
 		attr_accessor :words
 		attr_accessor :state
 		attr_accessor :index
 		attr_accessor :lives
 		attr_accessor :win
+	end
+
+	def self.icon(type)
+		'<span class="glyphicon glyphicon-' + type + '" aria-hidden="true"></span>'
 	end
 
 	def self.playing
@@ -17,6 +23,22 @@ class Game
 			self.reset
 			return false
 		end
+	end
+
+	def self.hits
+		hits = []
+		self.guesses.each do |c|
+			hits << c if self.word.include?(c)
+		end
+		hits
+	end
+
+	def self.misses
+		misses = []
+		self.guesses.each do |c|
+			misses << c if not self.word.include?(c)
+		end
+		misses
 	end
 
 	def self.words
@@ -40,9 +62,7 @@ class Game
 	end
 
 	def self.damage
-		if self.state[:guess] != nil
-			self.lives -= 1 if not self.word.include?(self.state[:guess])
-		end
+		self.lives = @@lives - self.misses.size
 	end
 
 	def self.options
@@ -104,7 +124,7 @@ class Game
 	private
 
 		def self.set_lives
-			self.lives = 5
+			self.lives = @@lives
 		end
 
 		def self.set_word

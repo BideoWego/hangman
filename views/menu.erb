@@ -1,6 +1,6 @@
 <h4>Select a difficulty level</h4>
 <div class="alert alert-info">
-	The difficulty level is the number of letters in the word
+	<%= Game.icon('info-sign') %> The difficulty level is the number of letters in the word
 </div>
 <form>
 	<div class="form-group">
@@ -11,5 +11,7 @@
 			<% end %>
 		</select>
 	</div>
-	<input type="submit" value="Start Game" class="btn btn-primary"/>
+	<button type="submit" class="btn btn-primary center-block">
+		<%= Game.icon('play-circle') %> Play
+	</button>
 </form>

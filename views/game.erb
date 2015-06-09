@@ -1,22 +1,37 @@
-<a href="/" class="btn btn-primary">New Game</a>
+<a href="/" class="btn btn-primary center-block"><%= Game.icon('home') %> Main Menu</a>
 
-<h3>Lives: <%= Game.lives %></h3>
+<% if Game.lives > 0 %>
+	<% if Game.win %>
+		<h2 class="big text-success">You win!</h2>
+	<% end %>
+<% else %>
+	<h2 class="big text-danger">You Lose!</h2>
+<% end %>
 
-<pre id="art" style="background: #222; color: #<%= ['c00', 'f30', 'f90', 'fc0', 'cf3', '6f6'][Game.lives] %>;"><%= $art[Game.lives] %></pre>
+<h3><span class="text-danger"><%= Game.icon('heart') %></span> Lives: <%= Game.lives %></h3>
+
+<pre id="art" class="health" style="background: #222;"><%= $art[Game.lives] %></pre>
 
 <% if Game.state[:cheat] %>
-	<h3>The word is <code><%= Game.word %></code></h3>
+	<h3><%= Game.icon('flash') %> The word is <code><%= Game.word %></code></h3>
 <% end %>
 
 <h2 id="progress">
-	<%= Game.progress %>
+	<% if Game.lives == 0 %>
+		<code><%= Game.word %></code>
+	<% else %>
+		<%= Game.progress %>
+	<% end %>
 </h2>
 
 <% if Game.lives > 0 %>
 
 	<% if Game.win %>
+
+		<h2 class="big text-success"><%= Game.icon('thumbs-up') %></h2>
+
 		<div class="alert alert-success">
-			You win! Hip hip hurray! <a href="/">Play again?</a>
+			Hip hip hooray! You win! <a href="/">Play again?</a>
 		</div>
 
 	<% else %>
@@ -34,15 +49,37 @@
 					<% end %>
 				</select>
 			</div>
-			<input type="submit" value="Make a guess!" class="btn btn-primary"/>
+			<button type="submit" class="btn btn-primary center-block">
+				<%= Game.icon('question-sign') %> Guess
+			</button>
 		</form>
 
 	<% end %>
 
 <% else %>
 
+	<h2 class="big text-danger"><%= Game.icon('thumbs-down') %></h2>
+
 	<div class="alert alert-danger">
-		You lose! The word was: <%= Game.word %>
+		Oh no! You lose! <a href="/">Play again?</a>
 	</div>
 
+<% end %>
+
+<% if Game.hits.size > 0 %>
+	<div id="hits" class="alert alert-success scoring">
+		<%= Game.icon('ok') %>
+		<% Game.hits.each_with_index do |m, i| %>
+			<%= m %><%= (i != Game.hits.size - 1) ? ',' : '' %>
+		<% end %>
+	</div>
+<% end %>
+
+<% if Game.misses.size > 0 %>
+	<div id="misses" class="alert alert-danger scoring">
+		<%= Game.icon('remove') %>
+		<% Game.misses.each_with_index do |m, i| %>
+			<%= m %><%= (i != Game.misses.size - 1) ? ',' : '' %>
+		<% end %>
+	</div>
 <% end %>
