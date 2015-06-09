@@ -13,7 +13,7 @@
 <pre id="art" class="health" style="background: #222;"><%= $art[Game.lives] %></pre>
 
 <% if Game.state[:cheat] %>
-	<h3><%= Game.icon('flash') %> The word is <code><%= Game.word %></code></h3>
+	<h3><span style="color: #fb0;"><%= Game.icon('flash') %></span> The word is <code><%= Game.word %></code></h3>
 <% end %>
 
 <h2 id="progress">
